@@ -126,12 +126,12 @@ NavMeshAgent:
   m_GameObject: {fileID: 1988052923997923516}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.2
-  m_Speed: 3.5
-  m_Acceleration: 8
+  m_Radius: 0.35
+  m_Speed: 2.2
+  m_Acceleration: 10
   avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_AngularSpeed: 540
+  m_StoppingDistance: 0.1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -152,9 +152,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CreepPath
   currentWaypointIndex: 2
-  attackDamage: 50
-  attackRange: 2
-  attackCooldown: 1.2
+  waypointReachDistance: 2
+  attack:
+    damageMin: 19
+    damageMax: 23
+    attackRange: 1
+    attackCooldown: 1
+    attackPoint: 0.45
+    attackType: 0
+    damageType: 0
+    critChance: 0
+    critMultiplier: 1.75
+    lifesteal: 0
+  aggroRange: 5
+  chaseLimit: 8
+  targetScanInterval: 0.3
+  repathInterval: 0.35
+  turnSpeed: 540
+  idleState: Idle
+  runState: Slow Run
+  attackState: Standing Torch Melee Attack 03
+  runAnimReferenceSpeed: 2.4
 --- !u!114 &8470571514975040637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,9 +185,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b37131d989e27241a61e87dfb59fafc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxHp: 10
-  currentHp: 0
   teamId: 1
+  unitKind: 1
+  maxHp: 300
+  currentHp: 300
+  hpRegen: 0.5
+  armor: 2
+  armorType: 0
+  magicResistance: 0
+  evasion: 0
+  moveSpeed: 2.2
+  goldBounty: 15
+  respawnTime: 0
+  healthBarPrefab: {fileID: 5008830893962368917, guid: 9d4446b8f2cf31040b7837a77891813c, type: 3}
+  healthBarHeight: 1.7
+  healthBarScale: 0.8
 --- !u!95 &2362704511575000650
 Animator:
   serializedVersion: 7
