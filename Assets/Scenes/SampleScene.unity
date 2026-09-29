@@ -896,7 +896,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fb0f5db7283cb547b535f7a6859bfec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Keeper
-  health: 1000
   ownerPlayerId: 2
 --- !u!136 &421831435
 CapsuleCollider:
@@ -990,9 +989,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b37131d989e27241a61e87dfb59fafc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxHp: 100
-  currentHp: 0
   teamId: 2
+  unitKind: 2
+  maxHp: 3000
+  currentHp: 3000
+  hpRegen: 2
+  armor: 10
+  armorType: 2
+  magicResistance: 0.5
+  evasion: 0
+  moveSpeed: 0
+  goldBounty: 300
+  respawnTime: 0
+  healthBarPrefab: {fileID: 5008830893962368917, guid: 9d4446b8f2cf31040b7837a77891813c, type: 3}
+  healthBarHeight: 2.1
+  healthBarScale: 1.8
 --- !u!1 &428986773
 GameObject:
   m_ObjectHideFlags: 0
@@ -1236,7 +1247,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fb0f5db7283cb547b535f7a6859bfec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Keeper
-  health: 1000
   ownerPlayerId: 1
 --- !u!136 &498242055
 CapsuleCollider:
@@ -1330,9 +1340,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b37131d989e27241a61e87dfb59fafc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxHp: 100
-  currentHp: 0
   teamId: 1
+  unitKind: 2
+  maxHp: 3000
+  currentHp: 3000
+  hpRegen: 2
+  armor: 10
+  armorType: 2
+  magicResistance: 0.5
+  evasion: 0
+  moveSpeed: 0
+  goldBounty: 300
+  respawnTime: 0
+  healthBarPrefab: {fileID: 5008830893962368917, guid: 9d4446b8f2cf31040b7837a77891813c, type: 3}
+  healthBarHeight: 2.1
+  healthBarScale: 1.8
 --- !u!1 &544492739
 GameObject:
   m_ObjectHideFlags: 0
@@ -1506,9 +1528,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b37131d989e27241a61e87dfb59fafc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxHp: 100
-  currentHp: 0
   teamId: 3
+  unitKind: 2
+  maxHp: 1800
+  currentHp: 1800
+  hpRegen: 0
+  armor: 8
+  armorType: 2
+  magicResistance: 0.5
+  evasion: 0
+  moveSpeed: 0
+  goldBounty: 150
+  respawnTime: 0
+  healthBarPrefab: {fileID: 5008830893962368917, guid: 9d4446b8f2cf31040b7837a77891813c, type: 3}
+  healthBarHeight: 1.1
+  healthBarScale: 1.5
 --- !u!1 &746605215
 GameObject:
   m_ObjectHideFlags: 0
@@ -1523,6 +1557,7 @@ GameObject:
   - component: {fileID: 746605219}
   - component: {fileID: 746605217}
   - component: {fileID: 746605216}
+  - component: {fileID: 900000002}
   m_Layer: 0
   m_Name: Player_3
   m_TagString: Untagged
@@ -1542,9 +1577,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 065a72e5b5a686b46938f4d3706ea1cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HeroAttack
-  attackRange: 3
-  attackDamage: 25
-  attackCooldown: 1
+  attack:
+    damageMin: 42
+    damageMax: 48
+    attackRange: 1.5
+    attackCooldown: 0.9
+    attackPoint: 0.3
+    attackType: 1
+    damageType: 0
+    critChance: 0.15
+    critMultiplier: 1.75
+    lifesteal: 0.1
+  autoAcquire: 1
+  acquireRange: 5
+  guardRadius: 11
+  turnSpeed: 720
+  repathInterval: 0.2
 --- !u!195 &746605217
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1710,7 +1758,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fb0f5db7283cb547b535f7a6859bfec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Keeper
-  health: 1000
   ownerPlayerId: 4
 --- !u!136 &764198527
 CapsuleCollider:
@@ -1804,9 +1851,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b37131d989e27241a61e87dfb59fafc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxHp: 100
-  currentHp: 0
   teamId: 4
+  unitKind: 2
+  maxHp: 3000
+  currentHp: 3000
+  hpRegen: 2
+  armor: 10
+  armorType: 2
+  magicResistance: 0.5
+  evasion: 0
+  moveSpeed: 0
+  goldBounty: 300
+  respawnTime: 0
+  healthBarPrefab: {fileID: 5008830893962368917, guid: 9d4446b8f2cf31040b7837a77891813c, type: 3}
+  healthBarHeight: 2.1
+  healthBarScale: 1.8
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2194,9 +2253,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b37131d989e27241a61e87dfb59fafc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxHp: 100
-  currentHp: 0
   teamId: 2
+  unitKind: 2
+  maxHp: 1800
+  currentHp: 1800
+  hpRegen: 0
+  armor: 8
+  armorType: 2
+  magicResistance: 0.5
+  evasion: 0
+  moveSpeed: 0
+  goldBounty: 150
+  respawnTime: 0
+  healthBarPrefab: {fileID: 5008830893962368917, guid: 9d4446b8f2cf31040b7837a77891813c, type: 3}
+  healthBarHeight: 1.1
+  healthBarScale: 1.5
 --- !u!1 &1263449286
 GameObject:
   m_ObjectHideFlags: 0
@@ -2311,7 +2382,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fb0f5db7283cb547b535f7a6859bfec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Keeper
-  health: 1000
   ownerPlayerId: 3
 --- !u!136 &1361504918
 CapsuleCollider:
@@ -2405,9 +2475,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b37131d989e27241a61e87dfb59fafc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxHp: 100
-  currentHp: 0
   teamId: 3
+  unitKind: 2
+  maxHp: 3000
+  currentHp: 3000
+  hpRegen: 2
+  armor: 10
+  armorType: 2
+  magicResistance: 0.5
+  evasion: 0
+  moveSpeed: 0
+  goldBounty: 300
+  respawnTime: 0
+  healthBarPrefab: {fileID: 5008830893962368917, guid: 9d4446b8f2cf31040b7837a77891813c, type: 3}
+  healthBarHeight: 2.1
+  healthBarScale: 1.8
 --- !u!1 &1388200731
 GameObject:
   m_ObjectHideFlags: 0
@@ -2422,6 +2504,7 @@ GameObject:
   - component: {fileID: 1388200735}
   - component: {fileID: 1388200733}
   - component: {fileID: 1388200732}
+  - component: {fileID: 900000001}
   m_Layer: 0
   m_Name: Player_2
   m_TagString: Untagged
@@ -2441,9 +2524,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 065a72e5b5a686b46938f4d3706ea1cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HeroAttack
-  attackRange: 3
-  attackDamage: 25
-  attackCooldown: 1
+  attack:
+    damageMin: 42
+    damageMax: 48
+    attackRange: 1.5
+    attackCooldown: 0.9
+    attackPoint: 0.3
+    attackType: 1
+    damageType: 0
+    critChance: 0.15
+    critMultiplier: 1.75
+    lifesteal: 0.1
+  autoAcquire: 1
+  acquireRange: 5
+  guardRadius: 11
+  turnSpeed: 720
+  repathInterval: 0.2
 --- !u!195 &1388200733
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2575,6 +2671,7 @@ GameObject:
   - component: {fileID: 1474389323}
   - component: {fileID: 1474389321}
   - component: {fileID: 1474389320}
+  - component: {fileID: 900000003}
   m_Layer: 0
   m_Name: Player_4
   m_TagString: Untagged
@@ -2594,9 +2691,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 065a72e5b5a686b46938f4d3706ea1cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HeroAttack
-  attackRange: 3
-  attackDamage: 25
-  attackCooldown: 1
+  attack:
+    damageMin: 42
+    damageMax: 48
+    attackRange: 1.5
+    attackCooldown: 0.9
+    attackPoint: 0.3
+    attackType: 1
+    damageType: 0
+    critChance: 0.15
+    critMultiplier: 1.75
+    lifesteal: 0.1
+  autoAcquire: 1
+  acquireRange: 5
+  guardRadius: 11
+  turnSpeed: 720
+  repathInterval: 0.2
 --- !u!195 &1474389321
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3018,7 +3128,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CreepSpawner
   creepPrefab: {fileID: 1988052923997923516, guid: 32563cd5cfd83544eb79b2b90bdabd8e, type: 3}
-  spawnInterval: 2
+  firstWaveDelay: 5
+  waveInterval: 30
+  creepsPerWave: 3
+  spawnSpacing: 1.5
+  spawnOffset: 2.5
+  hpGrowthPerWave: 0.04
+  damageGrowthPerWave: 0.03
+  extraCreepEveryNWaves: 5
+  maxCreepsPerWave: 6
 --- !u!114 &1748687837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3031,9 +3149,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b37131d989e27241a61e87dfb59fafc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxHp: 100
-  currentHp: 0
   teamId: 1
+  unitKind: 2
+  maxHp: 1800
+  currentHp: 1800
+  hpRegen: 0
+  armor: 8
+  armorType: 2
+  magicResistance: 0.5
+  evasion: 0
+  moveSpeed: 0
+  goldBounty: 150
+  respawnTime: 0
+  healthBarPrefab: {fileID: 5008830893962368917, guid: 9d4446b8f2cf31040b7837a77891813c, type: 3}
+  healthBarHeight: 1.1
+  healthBarScale: 1.5
 --- !u!1 &1750298137
 GameObject:
   m_ObjectHideFlags: 0
@@ -3440,9 +3570,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerClickMovement
   mainCamera: {fileID: 330585545}
-  attackRange: 4
-  attackDamage: 30
-  attackCooldown: 0.8
 --- !u!114 &1798754894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3455,9 +3582,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 065a72e5b5a686b46938f4d3706ea1cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HeroAttack
-  attackRange: 3
-  attackDamage: 25
-  attackCooldown: 1
+  attack:
+    damageMin: 42
+    damageMax: 48
+    attackRange: 1.5
+    attackCooldown: 0.9
+    attackPoint: 0.3
+    attackType: 1
+    damageType: 0
+    critChance: 0.15
+    critMultiplier: 1.75
+    lifesteal: 0.1
+  autoAcquire: 1
+  acquireRange: 5
+  guardRadius: 11
+  turnSpeed: 720
+  repathInterval: 0.2
 --- !u!114 &1798754895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3470,9 +3610,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b37131d989e27241a61e87dfb59fafc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxHp: 300
-  currentHp: 0
   teamId: 1
+  unitKind: 0
+  maxHp: 650
+  currentHp: 650
+  hpRegen: 2
+  armor: 4
+  armorType: 1
+  magicResistance: 0.25
+  evasion: 0.1
+  moveSpeed: 3.5
+  goldBounty: 100
+  respawnTime: 8
+  healthBarPrefab: {fileID: 5008830893962368917, guid: 9d4446b8f2cf31040b7837a77891813c, type: 3}
+  healthBarHeight: 0
+  healthBarScale: 1
 --- !u!114 &1798754896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3645,9 +3797,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b37131d989e27241a61e87dfb59fafc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxHp: 100
-  currentHp: 0
   teamId: 4
+  unitKind: 2
+  maxHp: 1800
+  currentHp: 1800
+  hpRegen: 0
+  armor: 8
+  armorType: 2
+  magicResistance: 0.5
+  evasion: 0
+  moveSpeed: 0
+  goldBounty: 150
+  respawnTime: 0
+  healthBarPrefab: {fileID: 5008830893962368917, guid: 9d4446b8f2cf31040b7837a77891813c, type: 3}
+  healthBarHeight: 1.1
+  healthBarScale: 1.5
 --- !u!1 &2142281933
 GameObject:
   m_ObjectHideFlags: 0
@@ -3778,6 +3942,87 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d4446b8f2cf31040b7837a77891813c, type: 3}
+--- !u!114 &900000001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388200731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b37131d989e27241a61e87dfb59fafc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  teamId: 2
+  unitKind: 0
+  maxHp: 650
+  currentHp: 650
+  hpRegen: 2
+  armor: 4
+  armorType: 1
+  magicResistance: 0.25
+  evasion: 0.1
+  moveSpeed: 3.5
+  goldBounty: 100
+  respawnTime: 8
+  healthBarPrefab: {fileID: 5008830893962368917, guid: 9d4446b8f2cf31040b7837a77891813c, type: 3}
+  healthBarHeight: 0
+  healthBarScale: 1
+--- !u!114 &900000002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746605215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b37131d989e27241a61e87dfb59fafc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  teamId: 3
+  unitKind: 0
+  maxHp: 650
+  currentHp: 650
+  hpRegen: 2
+  armor: 4
+  armorType: 1
+  magicResistance: 0.25
+  evasion: 0.1
+  moveSpeed: 3.5
+  goldBounty: 100
+  respawnTime: 8
+  healthBarPrefab: {fileID: 5008830893962368917, guid: 9d4446b8f2cf31040b7837a77891813c, type: 3}
+  healthBarHeight: 0
+  healthBarScale: 1
+--- !u!114 &900000003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474389319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b37131d989e27241a61e87dfb59fafc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  teamId: 4
+  unitKind: 0
+  maxHp: 650
+  currentHp: 650
+  hpRegen: 2
+  armor: 4
+  armorType: 1
+  magicResistance: 0.25
+  evasion: 0.1
+  moveSpeed: 3.5
+  goldBounty: 100
+  respawnTime: 8
+  healthBarPrefab: {fileID: 5008830893962368917, guid: 9d4446b8f2cf31040b7837a77891813c, type: 3}
+  healthBarHeight: 0
+  healthBarScale: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

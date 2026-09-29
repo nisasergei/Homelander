@@ -1,71 +1,75 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
+// Управление героем игрока: ПКМ по земле — идти, ПКМ по врагу — атаковать.
+// Урон, дальность и скорость атаки задаются в HeroAttack, HP и броня — в Health.
+[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(HeroAttack))]
 public class PlayerClickMovement : MonoBehaviour
 {
-    private NavMeshAgent agent;
+    public static int LocalTeamId { get; private set; } = 1;
+    public static PlayerClickMovement Local { get; private set; }
+
     public Camera mainCamera;
-    
-    public float attackRange = 2.5f;
-    public float attackDamage = 30f;
-    public float attackCooldown = 0.8f;
-    
-    private Transform attackTarget;
-    private float lastAttackTime;
+
+    NavMeshAgent agent;
+    HeroAttack heroAttack;
+    Health health;
+
+    public Health Health => health;
+    public HeroAttack Attack => heroAttack;
+
+    void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        heroAttack = GetComponent<HeroAttack>();
+        health = GetComponent<Health>();
+        if (health != null) LocalTeamId = health.teamId;
+        Local = this;
+    }
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
         if (mainCamera == null) mainCamera = Camera.main;
     }
 
     void Update()
     {
-        // Кликом ПКМ задаем движение или цель атаки
-        if (Mouse.current.rightButton.wasPressedThisFrame)
-        {
-            Vector2 mousePos = Mouse.current.position.ReadValue();
-            Ray ray = mainCamera.ScreenPointToRay(mousePos);
-            RaycastHit hit;
+        if (Mouse.current == null || mainCamera == null) return;
+        if (health != null && !health.IsAlive) return;
+        if (!Mouse.current.rightButton.wasPressedThisFrame) return;
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
 
-            if (Physics.Raycast(ray, out hit))
+        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        RaycastHit[] hits = Physics.RaycastAll(ray, 500f);
+        System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+
+        // 1) Кликнули по врагу — атакуем (ищем Health и у родителя, у крипов модель вложена)
+        foreach (RaycastHit hit in hits)
+        {
+            Health target = hit.collider.GetComponentInParent<Health>();
+            if (target != null && target != health && target.IsAlive && target.teamId != LocalTeamId)
             {
-                Health targetHealth = hit.collider.GetComponent<Health>();
-                // Если кликнули по врагу другого teamId
-                if (targetHealth != null && targetHealth.teamId != 1) 
-                {
-                    attackTarget = targetHealth.transform;
-                }
-                else
-                {
-                    attackTarget = null;
-                    agent.SetDestination(hit.point);
-                }
+                heroAttack.OrderAttack(target);
+                return;
             }
         }
 
-        // Логика преследования и атаки цели
-        if (attackTarget != null)
+        // 2) Иначе — идём в точку на земле (первая поверхность, у которой нет Health)
+        foreach (RaycastHit hit in hits)
         {
-            float distance = Vector3.Distance(transform.position, attackTarget.position);
-            if (distance <= attackRange)
+            if (hit.collider.GetComponentInParent<Health>() != null) continue;
+            if (hit.collider.isTrigger) continue;
+
+            if (agent.enabled && agent.isOnNavMesh)
             {
-                agent.ResetPath(); // Останавливаемся для атаки
-                if (Time.time - lastAttackTime >= attackCooldown)
-                {
-                    Health targetHp = attackTarget.GetComponent<Health>();
-                    if (targetHp != null)
-                    {
-                        targetHp.TakeDamage(attackDamage);
-                        lastAttackTime = Time.time;
-                    }
-                }
+                heroAttack.OrderMove();
+                agent.isStopped = false;
+                agent.SetDestination(hit.point);
             }
-            else
-            {
-                agent.SetDestination(attackTarget.position); // Подносим героя ближе
-            }
+            return;
         }
     }
 }

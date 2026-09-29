@@ -5,6 +5,7 @@ public class DotaCamera : MonoBehaviour
 {
     public float panSpeed = 25f;         // Скорость движения (клавиатура и края экрана)
     public float edgeBoundary = 20f;     // Отступ в пикселях от края экрана для мыши
+    public bool edgeScrolling = true;    // Движение камеры мышью у края экрана
     public float rotateSpeed = 100f;     // Скорость вращения колесиком мыши
     public float zoomSpeed = 10f;        // Скорость зума
     public float minZoom = 10f;          // Минимальная высота
@@ -14,7 +15,9 @@ public class DotaCamera : MonoBehaviour
     {
         if (Keyboard.current == null || Mouse.current == null) return;
 
-        // --- 1. ВРАЩЕНИЕ КАМЕРЫ (Зажатое колесико мыши MMB) ---
+
+        if (Keyboard.current.spaceKey.wasPressedThisFrame) CenterOnHero();
+
         if (Mouse.current.middleButton.isPressed)
         {
             float mouseX = Mouse.current.delta.x.ReadValue();
@@ -24,7 +27,6 @@ public class DotaCamera : MonoBehaviour
         {
             Vector3 moveDir = Vector3.zero;
 
-            // --- 2. УПРАВЛЕНИЕ С КЛАВИАТУРЫ (WASD / Стрелки) ---
             if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)
             {
                 moveDir -= transform.right;
@@ -34,9 +36,8 @@ public class DotaCamera : MonoBehaviour
                 moveDir += transform.right;
             }
 
-            // Направление "вперед/назад" с учетом текущего поворота камеры
             Vector3 forward = transform.forward;
-            forward.y = 0; // Игнорируем наклон вниз
+            forward.y = 0;
             forward.Normalize();
 
             if (Keyboard.current.wKey.isPressed || Keyboard.current.upArrowKey.isPressed)
@@ -48,22 +49,25 @@ public class DotaCamera : MonoBehaviour
                 moveDir -= forward;
             }
 
-            // --- 3. ДВИЖЕНИЕ ПО КРАЯМ ЭКРАНА (МЫШЬ) ---
             Vector2 mousePos = Mouse.current.position.ReadValue();
+            bool mouseInside = mousePos.x >= 0 && mousePos.y >= 0 &&
+                               mousePos.x <= Screen.width && mousePos.y <= Screen.height;
 
-            if (mousePos.x >= Screen.width - edgeBoundary) moveDir += transform.right;
-            if (mousePos.x <= edgeBoundary) moveDir -= transform.right;
-            if (mousePos.y >= Screen.height - edgeBoundary) moveDir += forward;
-            if (mousePos.y <= edgeBoundary) moveDir -= forward;
+            if (edgeScrolling && Application.isFocused && mouseInside)
+            {
+                if (mousePos.x >= Screen.width - edgeBoundary) moveDir += transform.right;
+                if (mousePos.x <= edgeBoundary) moveDir -= transform.right;
+                if (mousePos.y >= Screen.height - edgeBoundary) moveDir += forward;
+                if (mousePos.y <= edgeBoundary) moveDir -= forward;
+            }
 
-            // Применяем движение (нормализуем, чтобы по диагонали не двигалось быстрее)
             if (moveDir != Vector3.zero)
             {
+                moveDir.y = 0f;
                 transform.position += moveDir.normalized * panSpeed * Time.deltaTime;
             }
         }
 
-        // --- 4. ЗУМ КОЛЕСИКОМ ---
         float scroll = Mouse.current.scroll.y.ReadValue();
         if (scroll != 0f)
         {
@@ -74,5 +78,21 @@ public class DotaCamera : MonoBehaviour
             pos.y = Mathf.Clamp(pos.y, minZoom, maxZoom);
             transform.position = pos;
         }
+    }
+
+    void CenterOnHero()
+    {
+        PlayerClickMovement hero = PlayerClickMovement.Local;
+        if (hero == null) return;
+
+        Vector3 forward = transform.forward;
+        if (forward.y > -0.01f) return; 
+
+        float distToGround = (transform.position.y - hero.transform.position.y) / -forward.y;
+        Vector3 lookPoint = transform.position + forward * distToGround;
+
+        Vector3 offset = hero.transform.position - lookPoint;
+        offset.y = 0f;
+        transform.position += offset;
     }
 }
